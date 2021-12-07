@@ -85,6 +85,8 @@ func runService(name string, isDebug bool) {
 	}
 }
 
+//StartService can start a service via another interface.
+//This should be analogous to what the windows service application does.
 func StartService() error {
 	m, err := mgr.Connect()
 	if err != nil {

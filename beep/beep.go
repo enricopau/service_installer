@@ -10,6 +10,8 @@ package beep
 import (
 	"syscall"
 	"time"
+
+	"github.com/urfave/cli/v2"
 )
 
 // BUG(brainman): MessageBeep Windows api is broken on Windows 7,
@@ -19,9 +21,10 @@ var (
 	beepFunc = syscall.MustLoadDLL("user32.dll").MustFindProc("MessageBeep")
 )
 
-func Beep() {
+//Beep beeps every second
+func Beep(c *cli.Context) error {
 	for {
-		time.Sleep(3 * time.Second)
+		time.Sleep(1 * time.Second)
 		beepFunc.Call(0xffffffff)
 	}
 }

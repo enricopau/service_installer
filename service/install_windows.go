@@ -29,10 +29,10 @@ func install() error {
 		return fmt.Errorf("service %s already exists", SERVICE_NAME)
 	}
 	s, err := m.CreateService(SERVICE_NAME, ep, mgr.Config{
-		Description:      SERVICE_DESC,
-		StartType:        mgr.StartAutomatic,
-		ServiceType:      0,                            //0 value will default to Win32OwnProcess; see: https://docs.microsoft.com/de-de/dotnet/api/system.serviceprocess.servicetype?view=dotnet-plat-ext-6.0
-		ServiceStartName: "NT AUTHORITY\\LocalService", //only set this if you don't want your service to run under the local system account
+		Description: SERVICE_DESC,
+		StartType:   mgr.StartAutomatic,
+		//ServiceType: 0, //0 value will default to Win32OwnProcess; see: https://docs.microsoft.com/de-de/dotnet/api/system.serviceprocess.servicetype?view=dotnet-plat-ext-6.0
+		//ServiceStartName: "NT AUTHORITY\\LocalService", //only set this if you don't want your service to run under the local system account
 	})
 	if err != nil {
 		return err

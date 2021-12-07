@@ -2,12 +2,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/enricopau/service_installer/beep"
 	"github.com/enricopau/service_installer/service"
-	"golang.org/x/sys/windows/svc"
 
 	"github.com/urfave/cli/v2"
 )
@@ -33,16 +31,25 @@ func main() {
 					},
 				},
 			},
+			{
+				Name:   "app",
+				Usage:  "starts as an application",
+				Action: beep.Beep,
+			},
 		},
+	}
+	if len(os.Args) <= 0 {
+		os.Args = append(os.Args, "app")
+		app.Run(os.Args)
 	}
 	app.Run(os.Args)
 
-	isInteractive, err := svc.IsAnInteractiveSession()
-	if err != nil {
-		log.Print("kann ich nicht herausfinden :( srüüüüüüüüü")
-	}
-	if isInteractive {
-		beep.Beep()
-	}
+	// isWinSvc, err := svc.IsWindowsService()
+	// if err != nil {
+	// 	log.Print("kann ich nicht herausfinden :( srüüüüüüüüü")
+	// }
+	// if isWinSvc {
+	// 	beep.Beep()
+	// }
 
 }
